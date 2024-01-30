@@ -20,7 +20,7 @@ on:
         type: boolean
 
 env:
-  SPEC_NAME: cmviot_v2v-rtc-ios
+  SPEC_NAME: cmviot_v2v-rtc-ios-voice
   COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
 
 jobs:
@@ -36,9 +36,9 @@ jobs:
 
       - name: Update version and url
         run: |
-          sed "s/s.version = \"\(.*\)\"/s.version = \"${{ inputs.version }}\"/g" cmviot_v2v-rtc-ios.podspec > tmp
+          sed "s/s.version = \"\(.*\)\"/s.version = \"${{ inputs.version }}\"/g" ${{ env.SPEC_NAME }}.podspec > tmp
           mv tmp ${{ env.SPEC_NAME }}.podspec
-          sed "s#:http => \"\(.*\)\"#:http => \"${{ inputs.url }}\"#g" cmviot_v2v-rtc-ios.podspec > tmp
+          sed "s#:http => \"\(.*\)\"#:http => \"${{ inputs.url }}\"#g" ${{ env.SPEC_NAME }}.podspec > tmp
           mv tmp ${{ env.SPEC_NAME }}.podspec
         working-directory: repo
 
